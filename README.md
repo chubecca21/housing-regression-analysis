@@ -5,7 +5,7 @@
 
 ## Overview
 ***
-This project undertakes a multiple linear regression analysis to explore which features of a house in King County were the best predictors of its sale price betwen May 2014 to May 2015. The goal was to identify the strongest variables associated with price for King County Real Estate Agency, to improve their accuracy in determining a recommended listing price that would be profitable for the seller while still attractive to buyers. Using an iterative approach to model-building, our final model found that the total living area, building grade of the house, number of floors, waterfront views, and distance to Bellevue had significant associations with price. It is recommended that a homeowner increases the size of their living space and their building grade via renovations should they be looking to increase the value of their house. 
+This project undertakes a multiple linear regression analysis to explore which features of a house in King County were the best predictors of its sale price between May 2014 to May 2015. The goal was to identify the strongest variables associated with price for King County Real Estate Agency, to improve their accuracy in determining a recommended listing price that would be profitable for the seller while still attractive to buyers. Using an iterative approach to model-building, our final model found that the total living area, building grade of the house, number of floors, waterfront views, and distance to Bellevue had significant associations with price. It is recommended that a homeowner increases the size of their living space and their building grade via renovations, should they be looking to increase the value of their house. 
 
 
 ## Business Problem
@@ -33,7 +33,7 @@ This project utilises an iterative approach to building a multiple linear regres
 * Straight-line distance from Bellevue
 Houses with more than 5 bedrooms or 4 bathrooms were dropped from the dataframe to increase the accuracy of the model in predicting the price of single-family homes, which are the majority of King County Real Estate Agency's clientele.
 
-The data was then split into a training and a test dataframe (75:25 split). Using the training data, I built multiple linear regression models to determine the strongest predictors of price via an iterative approach.  
+The data was then split into a training and a test dataframe (75:25 split). Using the training data, I built multiple linear regression models to determine the strongest predictors of price.  
 
 This analysis follows the CRISP-DM methodology. 
 
