@@ -1,66 +1,117 @@
-# Phase 2 Project
+# King County House Sales Regression Analysis
+***
+**Author:** Rebecca Chu
 
-Another module down--you're almost half way there!
 
-![awesome](https://raw.githubusercontent.com/learn-co-curriculum/dsc-phase-2-project-campus/master/halfway-there.gif)
+## Overview
+***
+This project undertakes a multiple linear regression analysis to explore which features of a house in King County were the best predictors of its sale price betwen May 2014 to May 2015. The goal was to identify the strongest variables associated with price for King County Real Estate Agency, to improve their accuracy in determining a recommended listing price that would be profitable for the seller while still attractive to buyers. Using an iterative approach to model-building, our final model found that the total living area, building grade of the house, number of floors, waterfront views, and distance to Bellevue had significant associations with price. It is recommended that a homeowner increases the size of their living space and their building grade via renovations should they be looking to increase the value of their house. 
 
-All that remains in Phase 2 is to put our newfound data science skills to use with a large project! This project should take 20 to 30 hours to complete.
 
-## Project Overview
+## Business Problem
+***
+King County Real Estate Agency is looking to improve their accuracy when determining a recommended listing price for their clients' properties so that sellers are able to sell their houses within a reasonable timeframe but still at a maximum profit. 
 
-For this project, you will use regression modeling to analyze house sales in a northwestern county.
+This analysis explored the following questions:
+* Which features of a house are the best predictors for price?
+* What actionable insights can be recommended to a homeowner to increase the price of their property?
 
-### The Data
 
-This project uses the King County House Sales dataset, which can be found in  `kc_house_data.csv` in the data folder in this repo. The description of the column names can be found in `column_names.md` in the same folder. As with most real world data sets, the column names are not perfectly described, so you'll have to do some research or use your best judgment if you have questions about what the data means.
+## Data
+***
+King County House Sales data was provided for this project. The dataset provided property information for 21,597 houses that were sold between May 2014 and May 2015. The target variable is house sale prices.
 
-It is up to you to decide what data from this dataset to use and how to use it. If you are feeling overwhelmed or behind, we recommend you ignore some or all of the following features:
+A brief description of column names can be found in `column_names.md` in the `data` folder. For more detail, please refer to the King County website's Residential Glossary of Terms (https://info.kingcounty.gov/assessor/esales/Glossary.aspx?type=r). 
 
-* date
-* view
-* sqft_above
-* sqft_basement
-* yr_renovated
-* zipcode
-* lat
-* long
-* sqft_living15
-* sqft_lot15
 
-### Business Problem
+## Methods
+***
+This project utilises an iterative approach to building a multiple linear regression model. I began by cleaning the dataframe (converting datatypes as necessary, dropping columns irrelevant to my analysis, and dealing with nulls). The following metrics were also created: 
+* Month the house was sold
+* The age of the building (year built - year sold)
+* Straight-line distance from Seattle
+* Straight-line distance from Bellevue
+Houses with more than 5 bedrooms or 4 bathrooms were dropped from the dataframe to increase the accuracy of the model in predicting the price of single-family homes, which are the majority of King County Real Estate Agency's clientele.
 
-It is up to you to define a stakeholder and business problem appropriate to this dataset.
+The data was then split into a training and a test dataframe (75:25 split). Using the training data, I built multiple linear regression models to determine the strongest predictors of price via an iterative approach.  
 
-If you are struggling to define a stakeholder, we recommend you complete a project for a real estate agency that helps homeowners buy and/or sell homes. A business problem you could focus on for this stakeholder is the need to provide advice to homeowners about how home renovations might increase the estimated value of their homes, and by what amount.
+This analysis follows the CRISP-DM methodology. 
 
-## Deliverables
 
-There are three deliverables for this project:
+## Results
+***
+The final model yielded a r2 score of 0.715, in other words representing 71.5% of the variance of house sale prices for King County from May 2014 and 2015 with a MSE of 0.073. 
 
-* A **GitHub repository**
-* A **Jupyter Notebook**
-* A **non-technical presentation**
+I found the following variables and one interaction term to be the best predictors of sale price: 
+* the square footage of total living space,
+* the distance from Bellevue,
+* the number of floors,
+* whether the house had a view to a waterfront,
+* the construction quality of improvements (as grade from 1 to 13),
+* and the interaction between total living space and houses with two floors.
 
-Review the "Project Submission & Review" page in the "Milestones Instructions" topic for instructions on creating and submitting your deliverables. Refer to the rubric associated with this assignment for specifications describing high-quality deliverables.
+The regression formula is as follows: 
 
-### Key Points
+price_log = 12.901368 +
+    0.168077 * sqft_living_log +
+    -0.213223 * dist_bellevue_log +
+    0.143770 * floors_1.5 +
+    -0.037811 * floors_2 +
+    0.141368 * floors_2.5 +
+    0.051897 * floors_3 +
+    0.663562 * waterfront_1.0 +
+    -0.222200 * grade_<5 +
+    -0.284872 * grade_5 +
+    -0.154125 * grade_6 +
+    0.156281 * grade_8 +
+    0.322796 * grade_9 +
+    0.453090 * grade_10 +
+    0.587976 * grade_11 +
+    0.773181 * grade_12 +
+    1.105327 * grade_13 +
+    0.056608 * sqft_living_log*floors_2     
 
-* **Your deliverables should explicitly address each step of the data science process.** Refer to [the Data Science Process lesson](https://github.com/learn-co-curriculum/dsc-data-science-processes) from Topic 19 for more information about process models you can use.
+Baseline for categorical variables:
+* Floors = 1
+* Waterfront = 0
+* Grade = 7
 
-* **Your Jupyter Notebook should demonstrate an iterative approach to modeling.** This means that you begin with a basic model, evaluate it, and then provide justification for and proceed to a new model. After you finish refining your models, you should provide 1-3 paragraphs discussing your final model - this should include interpreting at least 3 important parameter estimates or statistics.
+![Predictors](images/predictors.png)
+The building grade of the house had the strongest association with price, as construction quality increased, so did price.
 
-* **Based on the results of your models, your notebook and presentation should discuss at least two features that have strong relationships with housing prices.**
+A 1% increase in distance from Bellevue was also associated with a -0.21% decrease in price. 
+![Distance from cities](images/kc_map.png)
 
-## Getting Started
+Whether the house had a waterfront view also influenced price; houses with a waterfront view were associated with a 0.66% increase in price. An increase in the number of floors was generally associated with an increase in price, with the exception of houses with two floors. Accounting for the interaction between the size of total living space and houses with two floors however, was associated with an increase in price. Age and the month sold were not accurate predictors of price.
 
-Start on this project by forking and cloning [this project repository](https://github.com/learn-co-curriculum/dsc-phase-2-project) to get a local copy of the dataset.
+The model tested well against the test data, with a r2 score of 0.727, and had a similar MSE 0.071. Cross validation of the model found that it yielded similar r2 scores across different splits of the data, and there was minimal difference between the train MSE average and test MSE average. 
 
-We recommend structuring your project repository similar to the structure in [the Phase 1 Project Template](https://github.com/learn-co-curriculum/dsc-project-template). You can do this either by creating a new fork of that repository to work in or by building a new repository from scratch that mimics that structure.
 
-## Project Submission and Review
+## Conclusions
+***
 
-Review the "Project Submission & Review" page in the "Milestones Instructions" topic to learn how to submit your project and how it will be reviewed. Your project must pass review for you to progress to the next Phase.
+**The total living area, building grade of the house, number of floors, waterfront views, and distance to Bellevue were found to be the best predictors of sale price.** 
 
-## Summary
+As a homeowner, the following actionable insights can be taken to increase the price of their property: 
+* **Increasing the size of their total living space.** Finished spaces in the basement are included in this variable, and may be an easy way to increase the living space without sacrificing free space in the lot if the basement was previously unfinished. We would recommend only adding a second floor to the house, houses with three storeys or more had a weaker effect on price in comparison to two storey houses; this could be due to less demand. To see whether expanding the living area via horizontal extensions would be profitable, further analysis should be done to examine whether sacrificing free lot space would result in an increase in price or have an inverse effect. 
+* **Increasing the grade of their house.** Renovations with a higher quality finish, custom design and excellent craftsmanship are associated with a significant increase in price.
 
-This project will give you a valuable opportunity to develop your data science skills using real-world data. The end-of-phase projects are a critical part of the program because they give you a chance to bring together all the skills you've learned, apply them to realistic projects for a business stakeholder, practice communication skills, and get feedback to help you improve. You've got this!
+
+## Limitations and Next Steps
+***
+
+It should be noted that this model only predict house sale prices, not net profit; it is possible that renovations may not be worth completing if expenses outway profits. The model was designed with single-family homes in mind, the regression formula may not be suitable for any houses with more than 5 bedrooms or 4 bathrooms as they were treated as outliers in this analysis and removed.
+
+With the exception of the distance to Bellevue, this model is also solely focused on the features of the house and did not take into consideration houses' proximity to schools, shopping centres, hospitals, public transport and other amenities, all of which are external factors that may also determine the price of the home. It is also notes that the distance to Bellevue was measured via a straight-line distance, which may not be an accurate reflector of the distance or time it may take to travel into the city, although it does give an approximate guide.
+
+
+## Repository Structure
+***
+
+```
+├── README.md                                      <- The top-level README for reviewers of this project
+├── kc-house-sales-regression-analysis.ipynb       <- Narrative documentation of analysis in Jupyter notebook
+├── kc-house-sales-presentation.pdf                <- PDF version of project presentation
+├── data                                           <- Sourced externally
+└── images                                         <- Generated from code
+```
