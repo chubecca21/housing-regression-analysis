@@ -52,24 +52,24 @@ I found the following variables and one interaction term to be the best predicto
 
 The regression formula is as follows: 
 
-price_log = 12.901368 +
-    0.168077 * sqft_living_log +
-    -0.213223 * dist_bellevue_log +
-    0.143770 * floors_1.5 +
-    -0.037811 * floors_2 +
-    0.141368 * floors_2.5 +
-    0.051897 * floors_3 +
-    0.663562 * waterfront_1.0 +
-    -0.222200 * grade_<5 +
-    -0.284872 * grade_5 +
-    -0.154125 * grade_6 +
-    0.156281 * grade_8 +
-    0.322796 * grade_9 +
-    0.453090 * grade_10 +
-    0.587976 * grade_11 +
-    0.773181 * grade_12 +
-    1.105327 * grade_13 +
-    0.056608 * sqft_living_log*floors_2     
+price_log = 12.901368 +<br />
+    0.168077 * sqft_living_log +<br />
+    -0.213223 * dist_bellevue_log +<br />
+    0.143770 * floors_1.5 +<br />
+    -0.037811 * floors_2 +<br />
+    0.141368 * floors_2.5 +<br />
+    0.051897 * floors_3 +<br />
+    0.663562 * waterfront_1.0 +<br />
+    -0.222200 * grade_<5 +<br />
+    -0.284872 * grade_5 +<br />
+    -0.154125 * grade_6 +<br />
+    0.156281 * grade_8 +<br />
+    0.322796 * grade_9 +<br />
+    0.453090 * grade_10 +<br />
+    0.587976 * grade_11 +<br />
+    0.773181 * grade_12 +<br />
+    1.105327 * grade_13 +<br />
+    0.056608 * (sqft_living_log*floors_2)     
 
 Baseline for categorical variables:
 * Floors = 1
@@ -79,9 +79,7 @@ Baseline for categorical variables:
 ![Predictors](images/predictors.png)
 The building grade of the house had the strongest association with price, as construction quality increased, so did price.
 
-A 1% increase in distance from Bellevue was also associated with a -0.21% decrease in price. 
-![Distance from cities](images/kc_map.png)
-
+A 1% increase in distance from Bellevue was also associated with a -0.21% decrease in price. ![Distance from cities](images/kc_map.png)
 Whether the house had a waterfront view also influenced price; houses with a waterfront view were associated with a 0.66% increase in price. An increase in the number of floors was generally associated with an increase in price, with the exception of houses with two floors. Accounting for the interaction between the size of total living space and houses with two floors however, was associated with an increase in price. Age and the month sold were not accurate predictors of price.
 
 The model tested well against the test data, with a r2 score of 0.727, and had a similar MSE 0.071. Cross validation of the model found that it yielded similar r2 scores across different splits of the data, and there was minimal difference between the train MSE average and test MSE average. 
