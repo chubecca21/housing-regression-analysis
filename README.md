@@ -4,12 +4,12 @@
 
 
 ## Overview
-***
+
 This project undertakes a multiple linear regression analysis to explore which features of a house in King County were the best predictors of its sale price between May 2014 to May 2015. The goal was to identify the strongest variables associated with price for King County Real Estate Agency, to improve their accuracy in determining a recommended listing price that would be profitable for the seller while still attractive to buyers. Using an iterative approach to model-building, our final model found that the total living area, building grade of the house, number of floors, waterfront views, and distance to Bellevue had significant associations with price. It is recommended that a homeowner increases the size of their living space and their building grade via renovations, should they be looking to increase the value of their house. 
 
 
 ## Business Problem
-***
+
 King County Real Estate Agency is looking to improve their accuracy when determining a recommended listing price for their clients' properties so that sellers are able to sell their houses within a reasonable timeframe but still at a maximum profit. 
 
 This analysis explored the following questions:
@@ -18,14 +18,14 @@ This analysis explored the following questions:
 
 
 ## Data
-***
+
 King County House Sales data was provided for this project. The dataset provided property information for 21,597 houses that were sold between May 2014 and May 2015. The target variable is house sale prices.
 
 A brief description of column names can be found in `column_names.md` in the `data` folder. For more detail, please refer to the King County website's Residential Glossary of Terms (https://info.kingcounty.gov/assessor/esales/Glossary.aspx?type=r). 
 
 
 ## Methods
-***
+
 This project utilises an iterative approach to building a multiple linear regression model. I began by cleaning the dataframe (converting datatypes as necessary, dropping columns irrelevant to my analysis, and dealing with nulls). The following metrics were also created: 
 * Month the house was sold
 * The age of the building (year built - year sold)
@@ -39,7 +39,7 @@ This analysis follows the CRISP-DM methodology.
 
 
 ## Results
-***
+
 The final model yielded a r2 score of 0.715, in other words representing 71.5% of the variance of house sale prices for King County from May 2014 and 2015 with a MSE of 0.073. 
 
 I found the following variables and one interaction term to be the best predictors of sale price: 
@@ -86,7 +86,6 @@ The model tested well against the test data, with a r2 score of 0.727, and had a
 
 
 ## Conclusions
-***
 
 **The total living area, building grade of the house, number of floors, waterfront views, and distance to Bellevue were found to be the best predictors of sale price.** 
 
@@ -96,7 +95,6 @@ As a homeowner, the following actionable insights can be taken to increase the p
 
 
 ## Limitations and Next Steps
-***
 
 It should be noted that this model only predict house sale prices, not net profit; it is possible that renovations may not be worth completing if expenses outway profits. The model was designed with single-family homes in mind, the regression formula may not be suitable for any houses with more than 5 bedrooms or 4 bathrooms as they were treated as outliers in this analysis and removed.
 
